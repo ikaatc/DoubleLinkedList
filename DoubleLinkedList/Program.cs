@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -77,11 +78,48 @@ namespace DoubleLinkedList
             current.prev = newnode;
             previous.next = newnode;
         }
-    }
-    internal class Program
-    {
-        static void Main(string[] args)
+
+        /*Checks wheteher the specified node is present*/
+        public bool Search(int rollNo, ref Node previous, ref Node current)
         {
+            for (previous = current = START; current != null &&
+                    rollNo != current.rollNumber; previous = current,
+                    current = current.next)
+            { }
+            /*The above for loop traverses the list. If the specified node
+             * is found the the function returns true, otherwise false.*/
+            return (current != null);
+        }
+
+        public bool delNode(int rollNo)/*Deletes the specified node*/
+        {
+            Node previous, current;
+            previous = current = null;
+            if (Search(rollNo, ref previous, ref current) == false)
+                return false;
+            if (current == START)/*If the first node is to be deleted*/
+            {
+                START = START.next;
+                if (START != null)
+                    START.prev = null;
+                return true;
+            }
+            if (current.next == null)/*If the last node is tobe deleted*/
+            {
+                previous.next = null;
+                return true;
+            }
+            /*If the node to be deleted is in between the list then the
+                following lines of code is executed.*/
+            previous.next = current.next;
+            current.next.prev = previous;
+            return true;
+        }
+        internal class Program
+        {
+            static void Main(string[] args)
+            {
+            }
         }
     }
 }
