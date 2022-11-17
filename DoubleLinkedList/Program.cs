@@ -17,6 +17,14 @@ namespace DoubleLinkedList
         public Node next;/*points to the suceeding node*/
         public Node prev;/*points to the preceeding node*/
     }
+    class DoubleLinkedList
+    {
+        Node START;
+        public DoubleLinkedList()
+        {
+            START = null;
+        }
+    }
     internal class Program
     {
         static void Main(string[] args)
